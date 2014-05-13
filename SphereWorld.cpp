@@ -11,6 +11,9 @@
 #define SCREEN_X    800;
 #define SCREEN_Y    600;
 
+// escape key (for exit)
+#define ESC 27
+
 ///////////////////////////////////////////////////
 // Called to draw scene
 GLfloat angle = 0.0f;
@@ -283,6 +286,11 @@ void ChangeSize(int w, int h)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 }
+// handel the quit key
+void processNormalKeys(unsigned char key, int xx, int yy)
+{
+    if (key == ESC || key == 'q' || key == 'Q') exit(0);
+}
 
 int main(int argc, char* argv[])
 {
@@ -292,6 +300,7 @@ int main(int argc, char* argv[])
     glutCreateWindow("OpenGL SphereWorld Demo + Lights and Shadow");
     glutReshapeFunc(ChangeSize);
     glutSpecialFunc(SpecialKeys);
+    glutKeyboardFunc(processNormalKeys);
 	glutDisplayFunc(RenderScene);
 	glutFullScreen();
 	//glutIdleFunc(&RenderScene);
