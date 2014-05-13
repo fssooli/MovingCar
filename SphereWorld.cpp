@@ -82,8 +82,7 @@ void DrowTires()
         glTranslatef(-0.1,-0.15,0.0); 
         glutSolidSphere (0.04, 30, 15);  
 		glPopMatrix();
-
-<<<<<<< HEAD
+}
 
 /**
  Draws the sun
@@ -135,7 +134,6 @@ void drawBall(void) {
      glEnd();
      glPopMatrix();
      */
-=======
 		glPushMatrix();
         glColor3f(1.0, 1.0, 1.0);  
         glTranslatef(-0.1,-0.15,0.0); 
@@ -154,7 +152,6 @@ void drawBall(void) {
         glTranslatef(0.18,-0.15,0.0); 
         glutSolidSphere (0.02, 30, 5);  
 		glPopMatrix();
->>>>>>> d017f41534234b602197ef6af3dc5c0639dab54a
 }
 
 void drawSun(void) { 
@@ -234,12 +231,10 @@ void RenderScene(void)
     glPopMatrix();
 
 	glPushMatrix();
-<<<<<<< HEAD
     glTranslatef(0.0f, -0.2f, -1.5f);
     DrawCar();
     
     DrowTires();
-=======
 			glTranslatef(0.0f, -0.2f, -1.5f);
 			glLineWidth(15.0);
 			glBegin(GL_LINES);
@@ -249,7 +244,6 @@ void RenderScene(void)
 			//glVertex2f(-0.3f, -0.03f);
 			//glVertex2f(-0.45f, -0.03f);
 			glEnd();
->>>>>>> d017f41534234b602197ef6af3dc5c0639dab54a
 	glPopMatrix();
 
 
@@ -384,7 +378,7 @@ void RenderScene(void)
 
 	glPushMatrix();
 		glTranslatef(0.0f, -0.2f, -1.5f);
-		DrowCar();
+		DrawCar();
 		
 		DrowTires();
 	glPopMatrix();
