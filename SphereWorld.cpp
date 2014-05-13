@@ -56,7 +56,7 @@ void DrawGround(void)
     }
 }
 
-void DrowCar()
+void DrawCar()
 {
 	glBegin(GL_POLYGON);                // start drawing a polygon
     glColor3f(0.0f,0.3f,0.5f);            // Set The Color To Red
@@ -88,8 +88,11 @@ void DrowTires()
     glPopMatrix();
 }
 
+
+/**
+ Draws the sun
+ */
 void drawBall(void) {
-    /////////////Sun
     glPushMatrix();
     glColor3f(1.0, 1.0, 0.0);
     glTranslatef(-0.75,0.6,0.0);
@@ -208,7 +211,7 @@ void RenderScene(void)
     
 	glPushMatrix();
     glTranslatef(0.0f, -0.2f, -1.5f);
-    DrowCar();
+    DrawCar();
     
     DrowTires();
 	glPopMatrix();
