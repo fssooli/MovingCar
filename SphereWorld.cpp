@@ -11,8 +11,8 @@
 // comment this line to disable fullscreen mode
 #define FULLSCREEN_MODE
 
-#define SCREEN_X    800;
-#define SCREEN_Y    600;
+#define SCREEN_X  800
+#define SCREEN_Y  600
 
 // escape key (for exit)
 #define ESC 27
@@ -299,7 +299,7 @@ int main(int argc, char* argv[])
 {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowSize(800,600);
+    glutInitWindowSize(SCREEN_X,SCREEN_Y);
     glutCreateWindow("OpenGL SphereWorld Demo + Lights and Shadow");
     glutReshapeFunc(ChangeSize);
     glutSpecialFunc(SpecialKeys);
