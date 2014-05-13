@@ -8,6 +8,9 @@
 #include "Common/GLTools.h"	// OpenGL toolkit
 #include <math.h>
 
+// comment this line to disable fullscreen mode
+#define FULLSCREEN_MODE
+
 #define SCREEN_X    800;
 #define SCREEN_Y    600;
 
@@ -302,7 +305,10 @@ int main(int argc, char* argv[])
     glutSpecialFunc(SpecialKeys);
     glutKeyboardFunc(processNormalKeys);
 	glutDisplayFunc(RenderScene);
-	glutFullScreen();
+    #ifdef FULLSCREEN_MODE
+    glutFullScreen();
+    #endif
+
 	//glutIdleFunc(&RenderScene);
     
     
