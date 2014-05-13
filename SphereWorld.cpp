@@ -2,6 +2,9 @@
 #include "Common/GLTools.h"	// OpenGL toolkit
 #include <math.h>
 
+// escape key (for exit)
+#define ESC 27
+
 GLfloat FrontBlackLight= 0.29;
 GLfloat BackBlackLight= -0.19;
 
@@ -182,7 +185,7 @@ void RenderScene(void)
 
 
 	glPushMatrix();
-		glTranslatef(0.0f, -0.2f, -1.5f);
+            glTranslatef(0.0f, -0.2f, -1.5f);
 			glColor3f(0.6f, 0.3f, 0.2f);            // Set The Color To Red 
 			glBegin(GL_POLYGON);                // start drawing a polygon 
 				glVertex3f(5.0f, 0.15f, 0.0f);        // Top left 
@@ -506,6 +509,14 @@ void ChangeSize(int w, int h)
     glLoadIdentity();    
     }
 
+/**
+ Handel the quit key
+ */
+void processNormalKeys(unsigned char key, int xx, int yy)
+{
+    if (key == ESC || key == 'q' || key == 'Q') exit(0);
+}
+
 int main(int argc, char* argv[])
     {
     glutInit(&argc, argv);
@@ -513,6 +524,7 @@ int main(int argc, char* argv[])
     glutInitWindowSize(800,600);
     glutCreateWindow("OpenGL SphereWorld Demo + Lights and Shadow");
     glutReshapeFunc(ChangeSize);
+    glutKeyboardFunc(processNormalKeys);
     glutSpecialFunc(SpecialKeys);
 	glutDisplayFunc(RenderScene);
 	//glutFullScreen();
