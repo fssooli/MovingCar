@@ -124,6 +124,12 @@ void RenderScene(void)
         DrawGround();
 	glPopMatrix();
 
+
+///////////////////////////////////////////////////////////
+	///////////////////////////////////////////
+	// need texture to the foloowing POLYGON as a bricks
+
+
 	glPushMatrix();
 		glTranslatef(0.0f, -0.2f, -1.5f);
 			glColor3f(0.6f, 0.3f, 0.2f);            // Set The Color To Red 
