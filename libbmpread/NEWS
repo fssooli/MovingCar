@@ -1,0 +1,16 @@
+Changes currently in git
+------------------------
+
+* Some formatting, wording, and packaging tweaks.  Nothing functional has
+  changed.
+
+1.1 (2005 Mar. 15)
+------------------
+
+* Added byte-swapping code for big-endian machines (bmpread will now work on
+  Macs!).  Thanks to Micah Tomblin for testing this for me.
+
+1.0 (2005 Mar. 14)
+------------------
+
+* Initial version.

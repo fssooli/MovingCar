@@ -1,0 +1,3 @@
+* Handle RLE compressed bitmaps
+* Don't fread entire structs - may not be portable; instead, read each member
+  individually
