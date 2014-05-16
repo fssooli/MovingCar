@@ -1,6 +1,14 @@
 #include "Common/OpenGLSB.h"	// System and OpenGL Stuff
 #include "Common/GLTools.h"	// OpenGL toolkit
 #include <math.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+
+#include "libbmpread/bmpread.h"
+
+/* START objects */
+#include "wall.h"
+/* END objects */
 
 // escape key (for exit)
 #define ESC 27
@@ -184,19 +192,21 @@ void RenderScene(void)
 	// need texture to the foloowing POLYGON as a bricks
 
 
-	glPushMatrix();
-            glTranslatef(0.0f, -0.2f, -1.5f);
-			glColor3f(0.6f, 0.3f, 0.2f);            // Set The Color To Red 
-			glBegin(GL_POLYGON);                // start drawing a polygon 
-				glVertex3f(5.0f, 0.15f, 0.0f);        // Top left 
-				glVertex3f(5.0f, 0.5f, 0.0f);    
-				glVertex3f(-5.0f, 0.5f, 0.0f);    
-				glVertex3f(-5.0f, 0.15f, 0.0f);
-				//glVertex3f(-0.2f,0.1f, 0.0f);        // Bottom Right 
-				//glVertex3f(-0.2f,-0.15f, 0.0f);		   // Bottom Left     
-
-			glEnd();
-	glPopMatrix();
+        wall();
+        
+//	glPushMatrix();
+//            glTranslatef(0.0f, -0.2f, -1.5f);
+//			glColor3f(0.6f, 0.3f, 0.2f);            // Set The Color To Red 
+//			glBegin(GL_POLYGON);                // start drawing a polygon 
+//				glVertex3f(5.0f, 0.15f, 0.0f);        // Top left 
+//				glVertex3f(5.0f, 0.5f, 0.0f);    
+//				glVertex3f(-5.0f, 0.5f, 0.0f);    
+//				glVertex3f(-5.0f, 0.15f, 0.0f);
+//				//glVertex3f(-0.2f,0.1f, 0.0f);        // Bottom Right 
+//				//glVertex3f(-0.2f,-0.15f, 0.0f);		   // Bottom Left     
+//
+//			glEnd();
+//	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(0.0f, -0.2f, -1.5f);

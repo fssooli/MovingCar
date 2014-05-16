@@ -1,4 +1,0 @@
-CC=g++
-CFLAGS=-O3
-macosx:
-	$(CC) SphereWorld.cpp -o SphereWorld $(CFLAGS) -DMACOSX -framework GLUT -framework OpenGL
