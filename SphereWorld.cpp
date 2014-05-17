@@ -2,6 +2,7 @@
 #include "Common/GLTools.h"	// OpenGL toolkit
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <sys/stat.h>
 
 #include "libbmpread/bmpread.h"
@@ -15,39 +16,10 @@
 
 GLfloat FrontBlackLight= 0.29;
 GLfloat BackBlackLight= -0.19;
+GLfloat BackWhiteLight= 50;
 
-GLfloat L1P1=-0.15f;
-GLfloat L1P2= 0.0f;
+GLfloat Line = -5;
 
-GLfloat L7P1= -0.40f;
-GLfloat L7P2= -0.25f;
-
-GLfloat L8P1= -0.65f;
-GLfloat L8P2= -0.50f;
-
-GLfloat L9P1= -0.90f;
-GLfloat L9P2= -0.75f;
-
-GLfloat L2P1 = 0.10;
-GLfloat L2P2 = 0.25;
-
-GLfloat L3P1 = 0.35;
-GLfloat L3P2 = 0.5;
-
-GLfloat L4P1 = 0.6;
-GLfloat L4P2 = 0.75;
-
-GLfloat L5P1 = 0.85;
-GLfloat L5P2 = 1.0;
-
-GLfloat L6P1 = 1.10;
-GLfloat L6P2 = 1.25;
-
-GLfloat L10P1 = 1.35;
-GLfloat L10P2 = 1.50;
-
-GLfloat L11P1 = 1.60;
-GLfloat L11P2 = 1.75;
 
 void DrawGround(void)
     {
@@ -70,17 +42,17 @@ void DrawGround(void)
         }
     }
 
-void DrawCar()
+void DrowCar()
 {
-	glBegin(GL_POLYGON);                // start drawing a polygon 
-			glColor3f(0.0f,0.3f,0.5f);            // Set The Color To Red 
+	glBegin(GL_POLYGON);            
+			glColor3f(0.0f,0.3f,0.5f);  
   
-				glVertex3f(0.3f, -0.15f, 0.0f);        // Top left 
+				glVertex3f(0.3f, -0.15f, 0.0f);     
 				glVertex3f(0.3f, 0.0f, 0.0f);    
 				glVertex3f(0.1f, 0.1f, 0.0f);    
 				glVertex3f(-0.1f, 0.1f, 0.0f);
-				glVertex3f(-0.2f,0.1f, 0.0f);        // Bottom Right 
-				glVertex3f(-0.2f,-0.15f, 0.0f);		   // Bottom Left     
+				glVertex3f(-0.2f,0.1f, 0.0f);    
+				glVertex3f(-0.2f,-0.15f, 0.0f);	    
 
 			glEnd();
 }
@@ -93,58 +65,7 @@ void DrowTires()
         glTranslatef(-0.1,-0.15,0.0); 
         glutSolidSphere (0.04, 30, 15);  
 		glPopMatrix();
-}
 
-/**
- Draws the sun
- */
-void drawBall(void) {
-    glPushMatrix();
-    glColor3f(1.0, 1.0, 0.0);
-    glTranslatef(-0.75,0.6,0.0);
-    glutSolidSphere (0.06, 20, 100);
-    glPopMatrix();
-    /*
-     ///////////MidLine1
-     glPushMatrix();
-     glLineWidth(15.0);
-     glBegin(GL_LINES);
-     glColor3f( 0.0f, 0.0f, 0.0f);
-     glVertex2f(0.6f, -0.03f);
-     glVertex2f(0.75f, -0.03f);
-     glEnd();
-     glPopMatrix();
-     
-     ///////////MidLine2
-     glPushMatrix();
-     glLineWidth(15.0);
-     glBegin(GL_LINES);
-     glColor3f( 0.0f, 0.0f, 0.0f);
-     glVertex2f(0.35f, -0.03f);
-     glVertex2f(0.5f, -0.03f);
-     glEnd();
-     glPopMatrix();
-     
-     ///////////MidLine3
-     glPushMatrix();
-     glLineWidth(15.0);
-     glBegin(GL_LINES);
-     glColor3f( 0.0f, 0.0f, 0.0f);
-     glVertex2f(-0.3f, -0.03f);
-     glVertex2f(-0.45f, -0.03f);
-     glEnd();
-     glPopMatrix();
-     
-     ///////////MidLine4
-     glPushMatrix();
-     glLineWidth(15.0);
-     glBegin(GL_LINES);
-     glColor3f( 0.0f, 0.0f, 0.0f);
-     glVertex2f(-0.55f, -0.03f);
-     glVertex2f(-0.7f, -0.03f);
-     glEnd();
-     glPopMatrix();
-     */
 		glPushMatrix();
         glColor3f(1.0, 1.0, 1.0);  
         glTranslatef(-0.1,-0.15,0.0); 
@@ -174,6 +95,20 @@ void drawSun(void) {
 		glPopMatrix();
         } 
         
+void DrowLines()
+{
+	glTranslatef(0.0f, -0.2f, -1.5f);
+	for(float i=Line; i<100; i = i+0.5)
+	{		
+			glLineWidth(15.0);
+			glBegin(GL_LINES);
+			glColor3f( 0.0f, 0.0f, 0.0f);
+			glVertex2f(i, -0.2f);
+			glVertex2f(i+0.2, -0.2f);
+			glEnd();
+	}
+}
+        
 
 void RenderScene(void)
     {
@@ -187,218 +122,61 @@ void RenderScene(void)
 	glPopMatrix();
 
 
-///////////////////////////////////////////////////////////
-	///////////////////////////////////////////
-	// need texture to the foloowing POLYGON as a bricks
-
+// wall
 
         wall();
         
-//	glPushMatrix();
-//            glTranslatef(0.0f, -0.2f, -1.5f);
-//			glColor3f(0.6f, 0.3f, 0.2f);            // Set The Color To Red 
-//			glBegin(GL_POLYGON);                // start drawing a polygon 
-//				glVertex3f(5.0f, 0.15f, 0.0f);        // Top left 
-//				glVertex3f(5.0f, 0.5f, 0.0f);    
-//				glVertex3f(-5.0f, 0.5f, 0.0f);    
-//				glVertex3f(-5.0f, 0.15f, 0.0f);
-//				//glVertex3f(-0.2f,0.1f, 0.0f);        // Bottom Right 
-//				//glVertex3f(-0.2f,-0.15f, 0.0f);		   // Bottom Left     
-//
-//			glEnd();
-//	glPopMatrix();
-
 	glPushMatrix();
 		glTranslatef(0.0f, -0.2f, -1.5f);
 		drawSun();
 	glPopMatrix();
 
-	glPushMatrix();
-		glTranslatef(0.0f, -0.2f, -1.5f);
-			glLineWidth(15.0);
-			glBegin(GL_LINES);
-			glColor3f( 0.0f, 0.0f, 0.0f);
-			glVertex2f(L1P1, -0.1f);
-			glVertex2f(L1P2, -0.1f);
-			//glVertex2f(-0.55f, -0.03f);
-			//glVertex2f(-0.7f, -0.03f);
-			glEnd();
-    glPopMatrix();
 
-		glPushMatrix();
-		glTranslatef(0.0f, -0.2f, -1.5f);
-			glLineWidth(15.0);
-			glBegin(GL_LINES);
-			glColor3f( 0.0f, 0.0f, 0.0f);
-			glVertex2f(L5P1, -0.1f);
-			glVertex2f(L5P2, -0.1f);
-			//glVertex2f(-0.55f, -0.03f);
-			//glVertex2f(-0.7f, -0.03f);
-			glEnd();
-    glPopMatrix();
-
-			glPushMatrix();
-		glTranslatef(0.0f, -0.2f, -1.5f);
-			glLineWidth(15.0);
-			glBegin(GL_LINES);
-			glColor3f( 0.0f, 0.0f, 0.0f);
-			glVertex2f(L6P1, -0.1f);
-			glVertex2f(L6P2, -0.1f);
-			//glVertex2f(-0.55f, -0.03f);
-			//glVertex2f(-0.7f, -0.03f);
-			glEnd();
-    glPopMatrix();
-
-	glPushMatrix();
-    glTranslatef(0.0f, -0.2f, -1.5f);
-    DrawCar();
-    
-    DrowTires();
-			glTranslatef(0.0f, -0.2f, -1.5f);
-			glLineWidth(15.0);
-			glBegin(GL_LINES);
-			glColor3f( 0.0f, 0.0f, 0.0f);
-			glVertex2f(L2P1, -0.1f);
-			glVertex2f(L2P2, -0.1f);
-			//glVertex2f(-0.3f, -0.03f);
-			//glVertex2f(-0.45f, -0.03f);
-			glEnd();
-	glPopMatrix();
-
-
-			glPushMatrix();
-			glTranslatef(0.0f, -0.2f, -1.5f);
-			glLineWidth(15.0);
-			glBegin(GL_LINES);
-			glColor3f( 0.0f, 0.0f, 0.0f);
-			glVertex2f(L3P1, -0.1f);
-			glVertex2f(L3P2, -0.1f);
-			//glVertex2f(0.35f, -0.03f);
-			//glVertex2f(0.5f, -0.03f);
-			glEnd();
-			glPopMatrix();
-
-			glPushMatrix();
-			glTranslatef(0.0f, -0.2f, -1.5f);
-			glLineWidth(15.0);
-			glBegin(GL_LINES);
-			glColor3f( 0.0f, 0.0f, 0.0f);
-			glVertex2f(L4P1, -0.1f);
-			glVertex2f(L4P2, -0.1f);
-			//glVertex2f(0.6f, -0.03f);
-			//glVertex2f(0.75f, -0.03f);
-			glEnd();
-			glPopMatrix();
-
-			glPushMatrix();
-			glTranslatef(0.0f, -0.2f, -1.5f);
-			glLineWidth(15.0);
-			glBegin(GL_LINES);
-			glColor3f( 0.0f, 0.0f, 0.0f);
-			glVertex2f(L7P1, -0.1f);
-			glVertex2f(L7P2, -0.1f);
-			//glVertex2f(0.6f, -0.03f);
-			//glVertex2f(0.75f, -0.03f);
-			glEnd();
-			glPopMatrix();
-
-			glPushMatrix();
-			glTranslatef(0.0f, -0.2f, -1.5f);
-			glLineWidth(15.0);
-			glBegin(GL_LINES);
-			glColor3f( 0.0f, 0.0f, 0.0f);
-			glVertex2f(L8P1, -0.1f);
-			glVertex2f(L8P2, -0.1f);
-			//glVertex2f(0.6f, -0.03f);
-			//glVertex2f(0.75f, -0.03f);
-			glEnd();
-			glPopMatrix();
-
-
-			glPushMatrix();
-			glTranslatef(0.0f, -0.2f, -1.5f);
-			glLineWidth(15.0);
-			glBegin(GL_LINES);
-			glColor3f( 0.0f, 0.0f, 0.0f);
-			glVertex2f(L9P1, -0.1f);
-			glVertex2f(L9P2, -0.1f);
-			//glVertex2f(0.6f, -0.03f);
-			//glVertex2f(0.75f, -0.03f);
-			glEnd();
-			glPopMatrix();
-
-
-			glPushMatrix();
-			glTranslatef(0.0f, -0.2f, -1.5f);
-			glLineWidth(15.0);
-			glBegin(GL_LINES);
-			glColor3f( 0.0f, 0.0f, 0.0f);
-			glVertex2f(L10P1, -0.1f);
-			glVertex2f(L10P2, -0.1f);
-			//glVertex2f(0.6f, -0.03f);
-			//glVertex2f(0.75f, -0.03f);
-			glEnd();
-			glPopMatrix();
-
-			glPushMatrix();
-			glTranslatef(0.0f, -0.2f, -1.5f);
-			glLineWidth(15.0);
-			glBegin(GL_LINES);
-			glColor3f( 0.0f, 0.0f, 0.0f);
-			glVertex2f(L11P1, -0.1f);
-			glVertex2f(L11P2, -0.1f);
-			//glVertex2f(0.6f, -0.03f);
-			//glVertex2f(0.75f, -0.03f);
-			glEnd();
-			glPopMatrix();
-
-			// النور الأمامي أصفر
+// Front Light "Yallow"
 	glPushMatrix();
 		glColor3f(1.0, 1.0, 0.0);  
 		glTranslatef(0.29f, -0.25f, -1.5f);
         glutSolidSphere (0.02, 15, 5); 
 	glPopMatrix();
 
-			// النور الامامي أسود
+// Front Light "Black"
 	glPushMatrix();
 		glColor3f(0.0, 0.0, 0.0);  
 		glTranslatef(FrontBlackLight, -0.25f, -1.5f);
         glutSolidSphere (0.02, 15, 5); 
 	glPopMatrix();
 
-
-			// النور الخلفي أحمر1
+// Back Light "Red"
 	glPushMatrix();
 		glColor3f(1.0, 0.0, 0.0);  
-		glTranslatef(-0.19f, -0.28f, -1.5f);
-        glutSolidSphere (0.02, 15, 5); 
+		glTranslatef(-0.19f, -0.25f, -1.5f); 
+		glutSolidCube(0.04);
 	glPopMatrix();
 
-			// النور الخلفي أحمر2
-	glPushMatrix();
-		glColor3f(1.0, 0.0, 0.0);  
-		glTranslatef(-0.19f, -0.23f, -1.5f);
-        glutSolidSphere (0.02, 15, 5); 
-	glPopMatrix();
-
-			// النور الخلفي أسود1
+// Back Light "Black"
 	glPushMatrix();
 		glColor3f(0.0, 0.0, 0.0);  
-		glTranslatef(BackBlackLight, -0.28f, -1.5f);
-        glutSolidSphere (0.02, 15, 5); 
+		glTranslatef(BackBlackLight, -0.25f, -1.5f); 
+		glutSolidCube(0.04);
 	glPopMatrix();
 
-			// النور الخلفي أسود2
+// Back Light "White"
 	glPushMatrix();
-		glColor3f(0.0, 0.0, 0.0);  
-		glTranslatef(BackBlackLight, -0.23f, -1.5f);
-        glutSolidSphere (0.02, 15, 5); 
+		glColor3f(1.0, 1.0, 1.0);  
+		glTranslatef(BackWhiteLight, -0.25f, -1.5f); 
+		glutSolidCube(0.02);
+	glPopMatrix();
+
+
+// Drow MidLines
+	glPushMatrix();
+		glTranslatef(0.0f, -0.2f, -1.5f);
+		DrowLines();
 	glPopMatrix();
 
 	glPushMatrix();
 		glTranslatef(0.0f, -0.2f, -1.5f);
-		DrawCar();
-		
+		DrowCar();	
 		DrowTires();
 	glPopMatrix();
 
@@ -418,54 +196,14 @@ void SpecialKeys(int key, int x, int y)
 
     if(key == GLUT_KEY_RIGHT)
 	{
-		 L1P1-=0.10;
-		 L1P2-=0.10;
-		 L2P1-=0.10;
-		 L2P2-=0.10;
- 		 L3P1-=0.10;
-		 L3P2-=0.10;
-  		 L4P1-=0.10;
-		 L4P2-=0.10;
-		 L5P1-=0.10;
-		 L5P2-=0.10;
- 		 L6P1-=0.10;
-		 L6P2-=0.10;
- 		 L7P1-=0.10;
-		 L7P2-=0.10;
- 		 L8P1-=0.10;
-		 L8P2-=0.10;
- 		 L9P1-=0.10;
-		 L9P2-=0.10;
- 		 L10P1-=0.10;
-		 L10P2-=0.10;
- 		 L11P1-=0.10;
-		 L11P2-=0.10;
+		 BackWhiteLight = 50;
+		 Line-=0.10;
 	}     
 
     if(key == GLUT_KEY_LEFT)
 	{
-		 L1P1 +=0.10;
-		 L1P2 +=0.10;
- 		 L2P1 +=0.10;
-		 L2P2 +=0.10;
-  		 L3P1 +=0.10;
-		 L3P2 +=0.10;
-  		 L4P1 +=0.10;
-		 L4P2 +=0.10;
-		 L5P1 +=0.10;
-		 L5P2 +=0.10;
- 		 L6P1 +=0.10;
-		 L6P2 +=0.10;
- 		 L7P1 +=0.10;
-		 L7P2 +=0.10;
- 		 L8P1 +=0.10;
-		 L8P2 +=0.10;
- 		 L9P1 +=0.10;
-		 L9P2 +=0.10;
- 		 L10P1 +=0.10;
-		 L10P2 +=0.10;
- 		 L11P1 +=0.10;
-		 L11P2 +=0.10;
+		BackWhiteLight = -0.20;
+		Line+=0.10;
 	}
 
 	if(key == GLUT_KEY_UP)
