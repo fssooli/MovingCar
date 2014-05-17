@@ -29,7 +29,7 @@ GLuint LoadTexture(const char * bitmap_file)
 
 void wall() {
     glEnable(GL_TEXTURE_2D);
-    GLuint tex1 = LoadTexture("brick.bmp");
+    GLuint tex1 = LoadTexture("Red_Brick_Wall.bmp");
     glPushMatrix();
         glTranslatef(0.0f, -0.2f, -1.5f);
         glBindTexture(GL_TEXTURE_2D, tex1);
