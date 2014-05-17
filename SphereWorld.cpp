@@ -6,6 +6,7 @@
 #include <sys/stat.h>
 
 #include "libbmpread/bmpread.h"
+#include "loadTexture.h"
 
 /* START objects */
 #include "wall.h"
